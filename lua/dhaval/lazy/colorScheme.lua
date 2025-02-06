@@ -11,7 +11,7 @@ return {
         "rose-pine/neovim",
         name = "rose-pine",
         config = function()
-            --ColorMyPencils();
+            ColorMyPencils();
         end
     },
     {
@@ -19,7 +19,7 @@ return {
         lazy = false,
         priority = 1000,
         config = function()
-            ColorMyPencils("tokyonight");
+            --ColorMyPencils("tokyonight");
         end,
     }
 }
