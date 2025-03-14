@@ -7,20 +7,14 @@ return {
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-cmdline',
             "j-hui/fidget.nvim",
+            "onsails/lspkind.nvim",
         },
         config = function ()
             local cmp = require'cmp'
             local cmp_select = { behavior = cmp.SelectBehavior.Select }
-            local servers = { "clangd", "cssls", "eslint", "html", "lua_ls", "tailwindcss", "ts_ls" }
-            local capabilities = require('cmp_nvim_lsp').default_capabilities()
-            for _, server in ipairs(servers) do
-                require("lspconfig")[server].setup({
-                    capabilities = capabilities,
-                })
-            end
+            local lspkind = require('lspkind')
 
             require("fidget").setup({})
-
             cmp.setup({
                 snippet = {
                     expand = function(args)
@@ -40,10 +34,23 @@ return {
                     ['<C-e>'] = cmp.mapping.abort(),
                 }),
                 sources = cmp.config.sources({
+                    { name = 'luasnip' }, -- For luasnip users.
                     { name = 'nvim_lsp' },
-                     { name = 'luasnip' }, -- For luasnip users.
-                }, {
                     { name = 'buffer' },
+                    { name = 'path' },
+                }),
+
+                formatting = ({
+                    format = lspkind.cmp_format({
+                        mode = 'symbol',
+                        maxwidth = {
+                            menu = 50,
+                            abbr = 50,
+                        },
+                        ellipsis_char = '...',
+                        show_labelDetails = true,
+
+                    })
                 })
             })
             -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
