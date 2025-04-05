@@ -1,9 +1,9 @@
 return {
     'brenoprata10/nvim-highlight-colors',
-        dependencies = {
+    dependencies = {
         'hrsh7th/nvim-cmp',
-        },
-    config = function ()
+    },
+    config = function()
         vim.opt.termguicolors = true
 
         require('nvim-highlight-colors').setup({
@@ -15,6 +15,6 @@ return {
                 format = require("nvim-highlight-colors").format
             },
         })
-        require("nvim-highlight-colors").turnOff()
+        --require("nvim-highlight-colors").turnOff()
     end
 }
